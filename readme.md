@@ -13,9 +13,13 @@ Modified the code in [Main branch](https://github.com/nilisha-jais/Banking-Appli
 
 A. Change the Account class to an abstract class, with display as abstract 
 method.
+
+
 B. Add an interface named Validation with two methods.
 - validateSSN()
 - validateAge()
+
+
 C. Implement Validation methods in customer class.
 - validateSSN()
 This should validate if the the SSN number has 9 digits
