@@ -2,7 +2,7 @@ package customer;
 
 import java.util.Scanner;
 
-public class Customer {
+public class Customer implements Validation {
     Scanner scan = new Scanner(System.in);
     String name;
     String username;
@@ -13,6 +13,9 @@ public class Customer {
     String email;
     long phone;
     float balance;
+
+    public Customer() {
+    }
 
     public Customer(String name, String username, String password, int age, String ssn, String address,
             String email, long phone, float balance) {
@@ -84,13 +87,15 @@ public class Customer {
 
     public void deposit(float amount) {
         this.balance += amount;
-        System.out.println("Rupees "+amount+" successfully deposited. Your current balance is Rupees " + this.balance);
+        System.out.println(
+                "Rupees " + amount + " successfully deposited. Your current balance is Rupees " + this.balance);
     }
 
     public void withdrawal(float amount) {
         if (amount <= this.balance) {
             this.balance -= amount;
-            System.out.println("Rupees "+amount+" successfully withdrawan. Your current balance is " + this.balance);
+            System.out
+                    .println("Rupees " + amount + " successfully withdrawan. Your current balance is " + this.balance);
         } else
             System.out.println("Insufficient balance in account.");
     }
@@ -118,6 +123,70 @@ public class Customer {
 
     public void changePassword(String password) {
         this.password = password;
-        System.out.println("Password updated. New password is "+this.password);
+        System.out.println("Password updated. New password is " + this.password);
     }
+
+    public void validateAge(int age) {
+        if (age < 18) {
+            System.out.println(
+                    "You are not allowed to open an account. Enter a valid age which is greater than or equal to 18.");
+            System.out.println("Do you want to restart(yes/no):");
+            String ch1 = scan.next();
+            if (ch1.toLowerCase().equals("yes")) {
+                openAccount();
+            } else {
+                System.out.println("Thank you for visiting!");
+                System.exit(0);
+            }
+
+        }
+    }
+
+    public void validateSSN(String ssn) {
+        if (ssn.length() < 9 || ssn.length() > 9) {
+            System.out.println("Invalid SSN number. Enter a SSN number of length 9");
+            System.out.println("Do you want to restart(yes/no):");
+            String ch2 = scan.next();
+            if (ch2.toLowerCase().equals("yes")) {
+                openAccount();
+            } else {
+                System.out.println("Thank you for visiting!");
+                System.exit(0);
+            }
+        }
+    }
+
+    public void openAccount() {
+        System.out.println("Enter the name: ");
+        String name = scan.next();
+
+        System.out.println("Enter the Username: ");
+        String username = scan.next();
+
+        System.out.println("Enter the password: ");
+        String password = scan.next();
+
+        System.out.println("Enter the age: ");
+        int age = scan.nextInt();
+        validateAge(age);
+
+        System.out.println("Enter the SSN: ");
+        String ssn = scan.next();
+        validateSSN(ssn);
+
+        System.out.println("Enter the Address: ");
+        String address = scan.next();
+
+        System.out.println("Enter Email: ");
+        String email = scan.next();
+
+        System.out.println("Enter the phone Number: ");
+        long phone = scan.nextLong();
+
+        Customer c2 = new Customer(name, username, password, age, ssn, address, email, phone, 0);
+
+        System.out.println("Profile Successfully created. Login using your credentials.");
+        c2.login();
+    }
+
 }

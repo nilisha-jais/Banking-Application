@@ -1,5 +1,6 @@
-import java.util.Scanner;
+import java.util.*;
 
+import account.*;
 import customer.Customer;
 
 public class Bank {
@@ -15,33 +16,16 @@ public class Bank {
                 c1.login();
                 break;
             case 2:
-                System.out.println("Enter the name: ");
-                String name = scan.next();
+                System.out.println("Choose the account type:\n1.Savings\n2.Current");
+                int ch = scan.nextInt();
+                if (ch == 1) {
+                    new Saving(new Random().nextLong());
 
-                System.out.println("Enter the Username: ");
-                String username = scan.next();
+                } else if (ch == 2) {
+                    new Current(new Random().nextLong());
 
-                System.out.println("Enter the password: ");
-                String password = scan.next();
-
-                System.out.println("Enter the age: ");
-                int age = scan.nextInt();
-
-                System.out.println("Enter the SSN: ");
-                String ssn = scan.next();
-
-                System.out.println("Enter the Address: ");
-                String address = scan.next();
-
-                System.out.println("Enter Email: ");
-                String email = scan.next();
-
-                System.out.println("Enter the phone Number: ");
-                long phone = scan.nextLong();
-                Customer c2 = new Customer(name, username, password, age, ssn, address, email, phone, 0);
-
-                System.out.println("Profile Successfully created. Login using your credentials.");
-                c2.login();
+                } else
+                    System.out.println("Invalid input");
                 break;
 
             default:
